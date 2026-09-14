@@ -1,0 +1,5 @@
+Model,24h RMSE/ACC,96h RMSE/ACC
+DIB-FNO,28.9 / 0.986,67.2 / 0.927
+FourCastNet,31.1 / 0.984,56.8 / 0.950
+AdaptFNO,29.5 / 0.986,55.4 / 0.955
+Persistence,31.7 / 0.984,52.5 / 0.958

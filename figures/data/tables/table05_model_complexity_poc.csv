@@ -1,0 +1,4 @@
+Model,Params (M),FLOPs (G)
+DIB-FNO,0.313,0.316
+FourCastNet,0.199,0.314
+AdaptFNO,0.201,0.314

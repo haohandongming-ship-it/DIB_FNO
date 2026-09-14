@@ -56,10 +56,18 @@ DIB_FNO/
 ├── forecast_fields_multi.png   # Fig.15 多时效预报场（6h / 24h / 48h）
 ├── model_complexity_table.png  #        模型参数量 / FLOPs 对比
 ├── fig11_spatial_error.pdf     # Fig.11 空间误差分布（矢量版）
-└── fig12_spatial_error_matrix.pdf  # Fig.12 空间误差矩阵（矢量版）
+├── fig12_spatial_error_matrix.pdf  # Fig.12 空间误差矩阵（矢量版）
+└── figures/                    # 论文图形重建交付包（见第 9 节）
+    ├── README.md               #   重建报告：10 条矛盾裁决 + 数据来源分级
+    ├── PROTOCOL.md             #   技术协议：两个命名实验规格、公式、锚点
+    ├── figures/                #   21 幅 Experiment P 图 + 3 幅 Experiment C 图
+    │                           #   （每幅 300 dpi PNG + 可编辑矢量 PDF，共 55 个文件）
+    ├── data/tables/*.csv       #   Table 1–6 原始数据（数字与论文一致）
+    ├── data/tracks/*.csv       #   Rai / Chanthu / Noru 的 JMA 最佳路径
+    └── scripts/*.py            #   出图脚本（common.py + make_figures_a~d + make_experiment_c + make_tables）
 ```
 
-> `fig11_*` / `fig12_*` 两个 PDF 为空间误差分析的矢量出图，当前版本的 `dibfno_validation.py` 未直接生成它们，属于随项目一起归档的既有产物。
+> 根目录的 `fig11_*` / `fig12_*` 两个 PDF 是空间误差分析的矢量出图，当前版本 `dibfno_validation.py` 未直接生成它们。注意它们与 `figures/figures/` 下的同名文件**内容不同**（各自保留，未做覆盖）。
 
 ## 4. 环境依赖
 
@@ -127,14 +135,48 @@ ds = ERA5LocalCache(variables=["msl", "u10", "v10", "t2m"],
 
 ## 8. 重要说明（结果性质）
 
-本仓库出图所用的 `main()` 流程在**数据与台风评估部分使用了合成/模拟数据**：
+本仓库包含**两套互不相同的内容**，引用时请勿混淆：
+
+### 8.1 根目录：代码 + 流程演示图
+
+根目录出图所用的 `main()` 流程在**数据与台风评估部分使用了合成/模拟数据**：
 
 - 若本地不存在 `./era5_cache/meta.npz`，脚本回退到 `_SyntheticDataset`（`_create_synthetic_dataset`）生成的数据；
 - 台风路径与强度由 `generate_synthetic_typhoon_tracks()` 合成，预报轨迹由 `simulate_typhoon_forecast_tracks(model_rmse=...)` 依模型 RMSE 模拟生成；
 - 每变量多时效曲线由整体 multi-step 结果按变量索引做比例缩放得到（见 `main()` 中 `[5/10]` 段）。
 
-因此仓库内的 PNG **是流程演示图（demo figures），不是论文最终实验结论**。要复现论文数值，需要按第 5 节接入真实 ERA5 数据后重跑，并把台风评估替换为真实最佳路径（best track）数据集。
+因此根目录的 PNG **是流程演示图（demo figures），不是论文最终实验结论**。要复现论文数值，需要按第 5 节接入真实 ERA5 数据后重跑，并把台风评估替换为真实最佳路径（best track）数据集。
 
-## 9. 许可证
+### 8.2 `figures/`：论文图形的**示意性重建**，不得当作实验结果
+
+`figures/` 是**论文图形重建交付包**，其自身 README 已明确声明其中绝大多数图为
+**illustrative reconstruction（示意性重建）**——即按论文表格中的锚点数值反推绘制的曲线，
+**不是模型运行输出**。该包把图形分为三类并逐图标注数据来源标签：
+
+| 类别 | 含义 | 代表图 |
+| --- | --- | --- |
+| **A verbatim** | 数值 100% 取自论文表格/正文，仅重绘 | fig01、fig06、fig14、figC1、figC3、表 1–6 |
+| **B mixed** | 部分数值来自论文，其余为示意重建 | fig02、fig03、fig07、fig13、fig19 |
+| **C reconstructed** | 无任何训练日志，全为锚点拟合的示意重建 | fig04、fig05、fig08–fig12、fig15–fig18、fig20、fig21、figC2 |
+
+**引用红线**：C 类图不得作为实验结果引用；`figures/README.md` 还记录了论文原文中 10 处
+自相矛盾之处（训练轮数、保留率、复杂度两套数字、变量集与单位混乱、高频保留结论正反颠倒等）
+及其裁决方式，并把实验拆分为 **Experiment P**（权威主实验）与 **Experiment C**（参考实验），
+两者数字**不得混用**。详细内容以 `figures/README.md` 与 `figures/PROTOCOL.md` 为准。
+
+## 9. 复现 `figures/` 重建包
+
+```bash
+cd figures/scripts
+python make_figures_a.py && python make_figures_b.py && python make_figures_c.py \
+  && python make_figures_d.py && python make_experiment_c.py && python make_tables.py
+```
+
+依赖 `numpy / scipy / matplotlib / pandas / geopandas`；所有随机过程使用固定种子（20240517），结果可复现。
+
+> `.gitignore` 中 `/data/` 只忽略仓库根目录的数据目录，`figures/data/`（表格锚点与最佳路径 CSV）
+> 通过 `!figures/data/**` 反向放行，以确保交付数据入库。
+
+## 10. 许可证
 
 本仓库未附许可证文件；如需开源使用，请先补充 `LICENSE`。

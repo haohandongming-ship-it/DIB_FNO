@@ -1,0 +1,4 @@
+Model,Params (M),Estimated FLOPs (G),Relative
+DIB-FNO,0.24,0.01,1.00x
+FourCastNet,0.08,0.01,1.01x
+AdaptFNO,0.08,0.01,1.00x

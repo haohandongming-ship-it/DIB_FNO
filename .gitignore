@@ -19,8 +19,14 @@ ENV/
 era5_cache/
 *.npy
 *.npz
-data/
-datasets/
+/datasets/
+
+# 注：这里刻意不忽略 data/ 目录本身，否则 figures/data/（论文表格锚点数据
+# 与台风最佳路径 CSV）会被连带排除。只忽略工作区根目录下的 data/。
+/data/
+# figures/data/ 为交付数据，必须入库（覆盖上面的规则）
+!figures/data/
+!figures/data/**
 
 # ---- 训练中间产物 ----
 checkpoints/

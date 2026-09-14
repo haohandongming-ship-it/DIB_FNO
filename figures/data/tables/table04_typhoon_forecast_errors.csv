@@ -1,0 +1,4 @@
+Model,24-h track error (km),48-h track error (km),72-h intensity error (m/s)
+FourCastNet,85 ± 12,210 ± 25,7.2 ± 1.1
+AdaptFNO,78 ± 10,192 ± 22,6.8 ± 1.0
+DIB-FNO,62 ± 9,158 ± 18,5.4 ± 0.8
