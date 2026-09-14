@@ -69,6 +69,10 @@ DIB_FNO/
 
 > 根目录的 `fig11_*` / `fig12_*` 两个 PDF 是空间误差分析的矢量出图，当前版本 `dibfno_validation.py` 未直接生成它们。注意它们与 `figures/figures/` 下的同名文件**内容不同**（各自保留，未做覆盖）。
 
+> `figures.zip`（约 20 MB）是 `figures/` 的打包副本，包含 `README.md`、`PROTOCOL.md`、
+> `figures/`、`data/`、`scripts/` 共 73 个条目，便于一次性下载整包；其内容与 `figures/`
+> 目录逐字节相同（已用 SHA256 全量核验）。两者只需其一即可。
+
 ## 4. 环境依赖
 
 - Python 3.9+
