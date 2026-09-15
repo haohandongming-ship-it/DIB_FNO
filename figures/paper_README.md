@@ -2,8 +2,8 @@
 
 > 论文：*DIB-FNO: Dynamic Information Bottleneck Fourier Neural Operator for Adaptive
 > Spectral Learning in Global Weather Forecasting*
-> 图形输出目录：`results_model/figures/`（21 幅论文图 + 6 幅表格图）
-> 技术协议：`results_model/PROTOCOL.md` ｜ 复现脚本：`results_model/scripts/`
+> 图形输出目录：`figures/paper/`（21 幅论文图 + 3 幅 Experiment C 参考图 + 6 幅表格图）
+> 技术协议：`figures/paper_PROTOCOL.md` ｜ 复现脚本：`figures/paper_scripts/`
 
 ---
 

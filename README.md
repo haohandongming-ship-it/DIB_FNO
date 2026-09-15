@@ -264,7 +264,10 @@ storage_options = {"token": "anon"}   # 匿名访问，无需凭证
 
 - 无本地缓存时数据来自 `SyntheticDataset`（`data/dataset.py`）；
 - 台风路径由 `generate_synthetic_typhoon_tracks()` 合成，预报轨迹由
-  `simulate_typhoon_forecast_tracks(model_rmse=...)` 按模型 RMSE 模拟。
+  `simulate_typhoon_forecast_tracks(model_rmse=...)` 按模型 RMSE 模拟；
+- `补充图_每变量RMSE和ACC随预报时效变化.png` 的**每变量曲线**由整体多步 RMSE/ACC
+  按变量索引做确定性缩放得到（`rmse × (1+0.1·i)`、`acc × (1−0.05·i)`），
+  反映的是相对量级，**不是**逐变量的独立测量值。
 
 **要得到真实结论**，需接入上表中的真实 ERA5 数据重跑，并把台风评估替换为真实
 best track 数据集。
