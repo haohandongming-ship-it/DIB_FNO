@@ -1,0 +1,21 @@
+# DIB-FNO 核心运行依赖
+# 安装:  pip install -r requirements.txt
+#
+# PyTorch 请按你的 CUDA 版本单独安装，见 https://pytorch.org/get-started/locally/
+#   CPU :  pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   CUDA:  pip install torch --index-url https://download.pytorch.org/whl/cu121
+torch>=1.13
+
+numpy>=1.23
+matplotlib>=3.6
+tqdm>=4.64
+
+# ---- 数据源依赖（按使用方式选装）----
+# ARCO-ERA5 Zarr 远程读取（source='zarr'，GCS 匿名访问）
+xarray>=2023.1
+zarr>=2.14
+gcsfs>=2023.1
+
+# 本地 GRIB 文件读取（source='grib'）
+cfgrib>=0.9.10
+eccodes>=1.6

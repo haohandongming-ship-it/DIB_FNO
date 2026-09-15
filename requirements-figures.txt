@@ -1,0 +1,11 @@
+# 论文图形重建包 (figures/paper_scripts) 的额外依赖
+# 安装:  pip install -r requirements-figures.txt
+#
+# 这些脚本按论文已报告的数值做「示意性重建」出图，不训练模型、不需要 GPU。
+# 全部随机过程固定种子，结果可复现。
+
+numpy>=1.23
+scipy>=1.9
+matplotlib>=3.6
+pandas>=1.5
+geopandas>=0.12      # 仅用于叠加海岸线；缺失时脚本自动跳过海岸线叠加

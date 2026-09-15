@@ -25,10 +25,29 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-PROJ = r"C:\Users\ROG\Desktop\新版论文\results_model"
-FIGDIR = os.path.join(PROJ, "figures")
-DATADIR = os.path.join(PROJ, "data")
+# ----------------------------------------------------------------------------
+# Paths are resolved relative to this file, so the package stays portable:
+#   <repo>/figures/paper_scripts/common.py   <- this file
+#   <repo>/figures/paper/                    <- 24 paper figures (PNG + PDF)
+#   <repo>/figures/paper_tables/             <- 6 re-typeset table images
+#   <repo>/figures/paper_data/{tables,tracks}
+# Override the repository root with the DIBFNO_FIGROOT environment variable.
+# ----------------------------------------------------------------------------
+_HERE = os.path.dirname(os.path.abspath(__file__))
+FIGROOT = os.environ.get("DIBFNO_FIGROOT", os.path.dirname(_HERE))
+
+FIGDIR = os.path.join(FIGROOT, "paper")
+TABLEDIR = os.path.join(FIGROOT, "paper_tables")
+DATADIR = os.path.join(FIGROOT, "paper_data")
 TRACKDIR = os.path.join(DATADIR, "tracks")
+
+# Natural Earth 110m coastline (public domain: https://www.naturalearthdata.com/).
+# Not vendored here; point DIBFNO_COASTLINE at a local copy to enable coastlines.
+# When missing, maps are drawn without the coastline overlay (no crash).
+COASTLINE = os.environ.get(
+    "DIBFNO_COASTLINE",
+    os.path.join(FIGROOT, "paper_data", "ne_110m_coastline.geojson"),
+)
 
 # ----------------------------------------------------------------------------
 # data-provenance stamps (reviewer requirement: reconstructed content must be

@@ -208,13 +208,13 @@ ILLUSTRATIVE RECONSTRUCTION）。
 ## 6. 交付清单
 
 ```
-results_model/
-├── README.md                        ← 本文件
-├── PROTOCOL.md                      ← 技术协议（两个命名实验规格、公式、锚点、重建口径）
-├── figures/                         ← 21+3 张论文图（300 dpi PNG + 矢量 PDF；
-│   │                                 全部英文；每幅图左下角有【数据来源标签】+
-│   │                                 【实验归属与完整规格】两行注记）
-│   │                                 以下 21 幅 = Experiment P（权威主实验）
+figures/                                 ← 本交付包在仓库中的位置
+├── paper_README.md                    ← 本文件（原 figures/README.md）
+├── paper_PROTOCOL.md                  ← 技术协议（两个命名实验规格、公式、锚点、重建口径）
+├── paper/                             ← 21+3 张论文图（300 dpi PNG + 矢量 PDF；
+│   │                                     全部英文；每幅图左下角有【数据来源标签】+
+│   │                                     【实验归属与完整规格】两行注记）
+│   │                                     以下 21 幅 = Experiment P（权威主实验）
 │   ├── fig01_architecture.png/.pdf        架构图（重绘，修正重叠/乱码）─ verbatim
 │   ├── fig02_correlation_matrix.png/.pdf  相关矩阵（0.93 为 Table 1；其余为估计）─ mixed
 │   ├── fig03_lr_schedule.png/.pdf         LR 余弦退火（按文中公式计算）─ mixed
@@ -240,11 +240,11 @@ results_model/
 │   ├── figC1_global_skill_reference.png/.pdf  Table 3 柱状图 + 误差棒 ─ verbatim
 │   ├── figC2_lead_time_reference.png/.pdf      1–10 天曲线（均值严格 = Table 3）─ RECONSTRUCTION
 │   ├── figC3_complexity_reference.png/.pdf     Table 2 复杂度 ─ verbatim
-│   └── tables/table01..06.png              6 张表格重排图（全部 verbatim）
-├── data/
+│   └── paper_tables/table01..06.png       6 张表格重排图（全部 verbatim）
+├── paper_data/
 │   ├── tables/table01..06.csv             表格原始数据（数字与论文一致）
 │   └── tracks/rai|chanthu|noru_besttrack.csv   JMA 最佳路径（6 小时间隔）
-└── scripts/
+└── paper_scripts/
     ├── common.py                          统一数据模型 / 两个实验规格 / 锚点 / 样式
     ├── make_figures_a.py                  图 1–7（Experiment P）
     ├── make_figures_b.py                  图 8–12、14、21（Experiment P）
@@ -254,7 +254,11 @@ results_model/
     └── make_tables.py                     表格 CSV + 表格图
 ```
 
-**复现**：`cd results_model/scripts && python make_figures_a.py && python make_figures_b.py
+**复现**：`cd figures/paper_scripts && python make_figures_a.py && python make_figures_b.py
 && python make_figures_c.py && python make_figures_d.py && python make_experiment_c.py
 && python make_tables.py`
+
+> 路径说明：脚本用 `DIBFNO_FIGROOT`（默认＝`figures/`）解析输出目录，因此仓库放在
+> 任何位置都能跑。海岸线叠加需要 Natural Earth 110m GeoJSON，可用 `DIBFNO_COASTLINE`
+> 指定本地路径；未提供时脚本自动跳过海岸线（不报错）。
 （依赖 numpy/scipy/matplotlib/pandas/geopandas；所有随机过程固定种子，结果可复现。）

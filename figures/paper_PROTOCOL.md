@@ -219,11 +219,12 @@ only for their reported components.
 
 ## 9. Editable delivery (per PDF-processing guidelines)
 
-* Each figure is delivered twice: **300 dpi PNG** (`figures/*.png`) and **vector PDF**
-  (`figures/*.pdf`, same base name, fully editable in any PDF editor).
-* All anchor values are plain CSVs (`data/tables/table01..06.csv`, `data/tracks/*.csv`);
-  every figure is produced by an executable script (`scripts/`) with a fixed seed, so any
-  figure can be re-generated or re-styled without re-drawing by hand.
+* Each figure is delivered twice: **300 dpi PNG** (`figures/paper/*.png`) and **vector PDF**
+  (`figures/paper/*.pdf`, same base name, fully editable in any PDF editor).
+* All anchor values are plain CSVs (`figures/paper_data/tables/table01..06.csv`,
+  `figures/paper_data/tracks/*.csv`); every figure is produced by an executable script
+  (`figures/paper_scripts/`) with a fixed seed, so any figure can be re-generated or
+  re-styled without re-drawing by hand.
 * Fonts: DejaVu Sans + mathtext (Latin/Greek glyphs only; no CJK glyphs inside figures,
   so transcription to PDF/LaTeX pipelines will not produce mojibake).
 

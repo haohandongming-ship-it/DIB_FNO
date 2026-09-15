@@ -10,12 +10,15 @@ import common as C
 C.style()
 os.makedirs(C.FIGDIR, exist_ok=True)
 
-COAST = os.path.join(r"C:\Users\ROG\Desktop\新版论文\_data", "ne_110m_coastline.geojson")
+COAST = C.COASTLINE
 OUT = lambda n: os.path.join(C.FIGDIR, n)
 
 COLS = C.MODEL_COLOR
 
 def _coast(ax, lw=0.5):
+    """Overlay the Natural Earth coastline when a local copy is available."""
+    if not os.path.exists(COAST):
+        return  # no coastline data -> draw the map without the overlay
     import geopandas as gpd
     gdf = gpd.read_file(COAST)
     gdf = gdf[gdf["geometry"].is_valid]

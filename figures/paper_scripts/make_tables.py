@@ -9,7 +9,7 @@ import common as C
 C.style()
 
 DATA = os.path.join(C.DATADIR, "tables")
-FIGT = os.path.join(C.FIGDIR, "tables")
+FIGT = C.TABLEDIR
 os.makedirs(DATA, exist_ok=True)
 os.makedirs(FIGT, exist_ok=True)
 
